@@ -1,21 +1,22 @@
-import { useState } from "react";
-import SignupPage from "./pages/SignupPage";
-import LoginPage from "./pages/LoginPage";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import Navbar from "./components/Navbar";
 import HomePage from "./pages/HomePage";
+import LoginPage from "./pages/LoginPage";
+import SignupPage from "./pages/SignupPage";
 
 function App() {
-  const [token, setToken] = useState(null);
+  const isAuthenticated = !!localStorage.getItem("token");
 
-  if (!token) {
-    return (
-      <div>
-        <SignupPage />
-        <LoginPage setToken={setToken} />
-      </div>
-    );
-  }
-
-  return <HomePage />;
+  return (
+    <Router>
+      <Navbar />
+      <Routes>
+        <Route path="/" element={isAuthenticated ? <HomePage /> : <Navigate to="/login" />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/signup" element={<SignupPage />} />
+      </Routes>
+    </Router>
+  );
 }
 
 export default App;

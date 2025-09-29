@@ -1,11 +1,14 @@
-import { useState } from "react";
 import LoginForm from "../components/LoginForm";
+import "./Auth.css";
 
-export default function LoginPage({ setToken }) {
+export default function LoginPage() {
   return (
-    <div>
-      <h1>Login</h1>
-      <LoginForm setToken={setToken} />
+    <div className="auth-container">
+      <h2>Login</h2>
+      <LoginForm />
+      <p>
+        Don't have an account? <a href="/signup">Signup here</a>
+      </p>
     </div>
   );
 }
